@@ -27,8 +27,32 @@ class View(object):
         )
 
         # Add your stuff here
+        # ROW1
+        self.ddLanguage = ft.Dropdown(value="Choose Language",
+                                      options=[ft.dropdown.Option("italian"),
+                                               ft.dropdown.Option("english"),
+                                               ft.dropdown.Option("spanish")],
+                                      on_change=self.__controller.handleLanguageSelection,
+                                      label="Select language")
 
-        # self.page.add([])
+        # ROW2
+        self.txtInput = ft.TextField(label="Add your sentence here", width=420)
+        self.btnSpellCheck = ft.ElevatedButton(text="Spell Check", on_click=self.__controller.handleSpellCheck)
+        self.ddSelectModality = ft.Dropdown(value="",
+                                            options=[ft.dropdown.Option("Default"),
+                                                     ft.dropdown.Option("Linear"),
+                                                     ft.dropdown.Option("Dichotomic")],
+                                            on_change=self.__controller.handleSelectSearchMode, width=200,
+                                            label="Search Modality")
+
+        row2 = ft.Row(controls=[self.ddSelectModality, self.txtInput, self.btnSpellCheck],
+                      alignment=ft.MainAxisAlignment.CENTER)
+
+        # ROW 3
+        self.txtOut = ft.ListView(expand=1, spacing=10)
+
+        # finally, update the page to visualize the elements
+        self.page.add(self.ddLanguage, row2, self.txtOut)
 
         self.page.update()
 
